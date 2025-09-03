@@ -2,14 +2,35 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>サンプルページ</title>
+  <title>わたしのページ</title>
   <style>
-    body { font-family: sans-serif; text-align: center; padding-top: 40px; }
-    h1   { color: #2c3e50; }
+    body {
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+      padding: 2em;
+    }
+    .card {
+      background: white;
+      padding: 2em;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      line-height: 1.6;
+    }
   </style>
 </head>
 <body>
-  <h1>Hello, GitHub Pages!</h1>
-  <p>これは GitHub 上で作成した HTML ファイルの例です。</p>
+  <div class="card">
+    <h1>こんにちは！</h1>
+    <p>はじめまして。これはわたしの自己紹介ページです。</p>
+    <p>趣味は読書とゲーム。最近はHTMLとCSSを勉強中！</p>
+    <p>GitHubを使って、いろんな作品を公開していきたいと思っています。</p>
+  </div>
 </body>
 </html>
