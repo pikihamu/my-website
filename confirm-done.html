@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>確認完了</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+    }
+    .box {
+      background: #fff;
+      padding: 40px 60px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h1 { margin: 0 0 20px; font-size: 1.8rem; }
+    p  { margin: 0; font-size: 1.2rem; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>完了</h1>
+    <p id="date"></p>
+  </div>
+
+  <script>
+    // ページを開いた日付を表示
+    const now   = new Date();
+    const yyyy  = now.getFullYear();
+    const mm    = String(now.getMonth() + 1).padStart(2, '0');
+    const dd    = String(now.getDate()).padStart(2, '0');
+    document.getElementById('date').textContent = `${yyyy}-${mm}-${dd}`;
+  </script>
+</body>
+</html>
