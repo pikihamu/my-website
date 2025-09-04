@@ -6,30 +6,44 @@
   <title>わたしのページ</title>
 
   <style>
+    /* レイアウト */
     body {
       font-family: sans-serif;
-      background:#f0f0f0;
-      padding:2em; margin:0;
+      background: #f0f0f0;
+      padding: 2em;
+      margin: 0;
     }
     .card {
-      max-width:600px; margin:auto;
-      background:#fff; padding:2em;
-      border-radius:8px;
-      box-shadow:0 0 10px rgba(0,0,0,.1);
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 2em;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    h1{color:#333;} p{line-height:1.6;}
+    h1 { color: #333; }
+    p  { line-height: 1.6; }
 
     /* 確認ボタン */
-    .btn-confirm{
-      display:inline-block;
-      padding:8px 24px; margin-top:24px;
-      border:3px solid #000; background:#fff; color:#000;
-      font-weight:700; text-decoration:none;
-      transition:.2s;
+    .btn-confirm {
+      display: inline-block;
+      padding: 8px 24px;
+      margin-top: 24px;
+      border: 3px solid #000;
+      background: #fff;
+      color: #000;
+      font-weight: 700;
+      text-decoration: none;
+      transition: .2s;
     }
-    .btn-confirm:hover{background:#000; color:#fff;}
+    .btn-confirm:hover,
+    .btn-confirm:focus {
+      background: #000;
+      color: #fff;
+    }
   </style>
 </head>
+
 <body>
   <div class="card">
     <h1>こんにちは！</h1>
@@ -37,22 +51,26 @@
     <p>趣味は読書とゲーム。最近は HTML と CSS を勉強中！</p>
     <p>GitHub を使って、いろんな作品を公開していきたいと思っています。</p>
 
-    <!-- ボタン or 確認済メッセージを差し替える領域 -->
+    <!-- ボタン または 確認済メッセージが入る領域 -->
     <div id="confirm-area">
       <a href="../confirm-done.html" class="btn-confirm">確認</a>
     </div>
   </div>
 
   <script>
-    // ページ読み込み時に localStorage を確認
-    document.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('checkedDate');
+    // localStorage を確認し、既に完了していればメッセージに置き換える
+    function checkConfirmed() {
+      const saved = localStorage.getItem('checkedDate'); // 例: 2025-09-05
       if (saved) {
-        // 既に確認済みならメッセージに置き換える
         document.getElementById('confirm-area').innerHTML =
           `<p style="font-weight:bold">確認済 : ${saved}</p>`;
       }
-    });
+    }
+
+    // 初回ロード時
+    document.addEventListener('DOMContentLoaded', checkConfirmed);
+    // 戻る/進むで bfcache から復元された場合
+    window.addEventListener('pageshow', checkConfirmed);
   </script>
 </body>
 </html>
