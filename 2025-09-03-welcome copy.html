@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>わたしのページ</title>
+
+  <style>
+    /* レイアウト */
+    body {
+      font-family: sans-serif;
+      background: #f0f0f0;
+      padding: 2em;
+      margin: 0;
+    }
+    .card {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 2em;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,.1);
+    }
+    h1 { color:#333; }
+    p  { line-height:1.6; }
+
+    /* 共通ボタンスタイル */
+    .btn {
+      display:inline-block;
+      padding:8px 24px;
+      margin-top:24px;
+      border:3px solid #000;
+      background:#fff;
+      color:#000;
+      font-weight:700;
+      text-decoration:none;
+      transition:.2s;
+      cursor:pointer;
+    }
+    .btn:hover,
+    .btn:focus {
+      background:#000;
+      color:#fff;
+    }
+  </style>
+</head>
+
+<body>
+   <div class="card">
+    <h1>○○○プロジェクト</h1>
+    <p>【設備名】PAC-1-1（ルームエアコン）</p>
+    <p>【設置場所】3F会議室</p>
+    <p>【型番】XS285ATRS-W</p>
+    <p>【設置日】2025年12月</p>
+    <p>【次回点検】2030年12月1日</p>
+    <p>【URL】https://www.ac.daikin.co.jp/kabekake/products/rx_series/spec</p>
+    <p>【連絡先】施設管理課 山田</p>
+     
+    <!-- ボタン／メッセージを動的に差し替える -->
+    <div id="confirm-area">
+      <a href="../confirm-done.html" class="btn">確認</a>
+    </div>
+  </div>
+
+  <script>
+    // 確認済みかどうか判定して表示を切り替える関数
+    function renderConfirmArea() {
+      const area  = document.getElementById('confirm-area');
+      const saved = localStorage.getItem('checkedDate');
+
+      if (saved) {
+        // 確認済み表示＋リセットボタン
+        area.innerHTML = `
+          <p style="font-weight:bold; margin:0 0 16px">
+            確認済 : ${saved}
+          </p>
+          <button id="reset-btn" class="btn" type="button">リセット</button>
+        `;
+
+        // リセットボタンクリックで localStorage 削除 → 再描画
+        document.getElementById('reset-btn').addEventListener('click', () => {
+          localStorage.removeItem('checkedDate');
+          location.reload(); // ページ再読み込み
+        });
+      } else {
+        // まだ未確認なら確認ボタンを出す
+        area.innerHTML = `
+          <a href="../confirm-done.html" class="btn">確認</a>
+        `;
+      }
+    }
+
+    // 初回ロード時 & bfcache 復元時
+    document.addEventListener('DOMContentLoaded', renderConfirmArea);
+    window.addEventListener('pageshow', renderConfirmArea);
+  </script>
+</body>
+</html>
